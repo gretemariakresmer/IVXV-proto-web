@@ -8,7 +8,7 @@ import { RouterOutlet } from '@angular/router';
   imports: [
     RouterOutlet
   ],
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title: string;
