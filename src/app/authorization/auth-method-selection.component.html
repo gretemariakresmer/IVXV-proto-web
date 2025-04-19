@@ -1,0 +1,10 @@
+<div class="auth-container">
+  <h2>E-hääletamiseks peate ennast tuvastama ID-kaardi, Mobiil-ID või Smart-ID abil:</h2>
+  <div class="button-group">
+    <button class="auth-button" (click)="selectMethod('id')">ID-kaart</button>
+    <button class="auth-button" (click)="selectMethod('mobile')">Mobiil-ID</button>
+    <button class="auth-button" (click)="selectMethod('smartId')">Smart-ID</button>
+  </div>
+
+  <!--app-pin-entry-dialog *ngIf="selectedMethod === 'id'"></app-pin-entry-dialog-->
+</div>
