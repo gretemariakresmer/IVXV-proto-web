@@ -1,9 +1,9 @@
-import {Component} from '@angular/core';
-import {SignInMethod} from './model/sign-in-method';
-import {MethodOption} from './model/method-option';
-import {CommonModule} from '@angular/common';
-import {IdCardPinEntryComponent} from './id-card-auth/id-card-pin-entry.component';
-import {MobileIdEntryComponent} from './mobile-id-auth/mobile-id-pin-entry.component';
+import { Component } from '@angular/core';
+import { SignInMethod } from './model/sign-in-method';
+import { MethodOption } from './model/method-option';
+import { CommonModule } from '@angular/common';
+import { IdCardPinEntryComponent } from './id-card-auth/id-card-pin-entry.component';
+import { MobileIdEntryComponent } from './mobile-id-auth/mobile-id-pin-entry.component';
 
 @Component({
   selector: 'app-auth-method-selection',

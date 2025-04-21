@@ -1,4 +1,4 @@
-import {SignInMethod} from './sign-in-method';
+import { SignInMethod } from './sign-in-method';
 
 export interface MethodOption {
   label: string;
