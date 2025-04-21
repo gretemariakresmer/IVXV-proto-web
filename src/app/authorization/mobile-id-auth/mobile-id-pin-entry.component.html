@@ -1,0 +1,32 @@
+<div class="mobile-dialog">
+  <p class="subtitle">Sisenemine Mobiil‑IDga</p>
+  <h2>Sisestage enda telefoninumber ja isikukood</h2>
+
+  <div class="field">
+    <label>Telefoninumber</label>
+    <input
+      type="tel"
+      [(ngModel)]="phone"
+      placeholder="+372 …"
+    />
+  </div>
+
+  <div class="field">
+    <label>Isikukood</label>
+    <input
+      type="text"
+      [(ngModel)]="idCode"
+      placeholder="XXXXXXXXXXXXX"
+    />
+  </div>
+
+  <div class="buttons">
+    <button class="secondary" (click)="onCancel()">Katkestan</button>
+    <button
+      class="primary"
+      [disabled]="!phone || !idCode"
+    >
+      Saadan
+    </button>
+  </div>
+</div>
