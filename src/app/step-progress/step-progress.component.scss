@@ -32,12 +32,19 @@
     background-color: #c0c4cc;
   }
 
-  &.active,
-  &.completed {
+  &.active {
     border-color: #0058a3;
 
     .circle-inner {
       background-color: #0058a3;
+    }
+  }
+
+  &.completed {
+    border-color: #28a745;
+
+    .circle-inner {
+      background-color: #28a745;
     }
   }
 }
