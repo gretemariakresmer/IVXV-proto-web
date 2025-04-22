@@ -1,0 +1,27 @@
+
+import { Component } from '@angular/core';
+import { Router }    from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { StepProgressComponent } from '../step-progress/step-progress.component';
+import { ElectionInformationComponent } from './election/election-information.component';
+
+@Component({
+  selector: 'app-introduction',
+  standalone: true,
+  imports: [
+    CommonModule,
+    StepProgressComponent,
+    ElectionInformationComponent,
+  ],
+  templateUrl: './introduction.component.html',
+  styleUrls: ['./introduction.component.scss']
+})
+export class IntroductionComponent {
+  userName: string = 'Peeter Hääletaja';
+  userIdCode: string = '12345678901';
+
+  constructor(private router: Router) {}
+  onCancel()  { this.router.navigate(['']); }
+  onContinue(){ this.router.navigate(['/choose']); }
+}
+

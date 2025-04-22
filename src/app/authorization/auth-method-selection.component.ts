@@ -4,6 +4,7 @@ import { MethodOption } from './model/method-option';
 import { CommonModule } from '@angular/common';
 import { IdCardPinEntryComponent } from './id-card-auth/id-card-pin-entry.component';
 import { MobileIdEntryComponent } from './mobile-id-auth/mobile-id-pin-entry.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth-method-selection',
@@ -13,6 +14,9 @@ import { MobileIdEntryComponent } from './mobile-id-auth/mobile-id-pin-entry.com
   imports: [CommonModule, IdCardPinEntryComponent, MobileIdEntryComponent]
 })
 export class AuthMethodSelectionComponent {
+
+  constructor(private router: Router) {}
+
   methods: MethodOption[] = [
     { label: 'ID-kaart', type: SignInMethod.ID_CARD },
     { label: 'Mobiil-ID', type: SignInMethod.MOBILE_ID }
@@ -28,6 +32,7 @@ export class AuthMethodSelectionComponent {
   }
 
   onPinSubmit() {
+    this.router.navigate(['/intro'])
   }
 
   protected readonly SignInMethod = SignInMethod;

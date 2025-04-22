@@ -1,0 +1,24 @@
+<div class="intro-card">
+  <div class="intro-body">
+
+    <div class="intro-info">
+      <app-election-information>
+      </app-election-information>
+    </div>
+
+    <div class="intro-data">
+      <h3>Minu andmed</h3>
+      <dl>
+        <dt>Nimi:</dt><dd>{{ userName }}</dd>
+        <dt>Isikukood:</dt><dd>{{ userIdCode }}</dd>
+      </dl>
+    </div>
+
+  </div>
+
+  <div class="intro-actions">
+    <button class="secondary" (click)="onCancel()">Katkestan</button>
+    <button class="primary"   (click)="onContinue()">Otsustama</button>
+  </div>
+
+</div>
