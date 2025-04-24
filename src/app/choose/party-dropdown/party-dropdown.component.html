@@ -1,0 +1,26 @@
+<div class="party-tree">
+  <ul class="party-list">
+    <li *ngFor="let p of filteredParties" class="party-group">
+      <div class="party-header" (click)="toggle(p)">
+        <span class="arrow" [class.expanded]="p.expanded">▶</span>
+        {{ p.party }}
+      </div>
+      <ul *ngIf="p.expanded" class="candidate-list">
+        <li *ngFor="let c of p.candidates"
+            class="candidate-item"
+            (click)="pick(c); $event.stopPropagation()"
+        >
+          {{c.id}} - {{ c.firstName }} {{ c.lastName }}
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <div class="search-box">
+    <input
+      type="text"
+      placeholder="Otsi"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="onSearch($event)"
+    />
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="detail-panel">
+  <h3>Minu valik on:</h3>
+  <div class="choice-card">
+    <div class="choice-id">{{ person?.id }}</div>
+    <div class="choice-name">{{ person?.firstName }} {{ person?.lastName }}</div>
+  </div>
+  <div class="actions">
+    <button (click)="cancel.emit()">Katkestan</button>
+    <button
+      (click)="confirm.emit(person!)"
+      [disabled]="!person">Valin</button>
+  </div>
+</div>

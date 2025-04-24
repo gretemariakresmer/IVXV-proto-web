@@ -10,5 +10,5 @@ import { CommonModule }      from '@angular/common';
 })
 export class ElectionInformationComponent {
   @Input() electionTitle: string = 'Tere tulemast!';
-  @Input() description: string = 'Olete e‑hääletamas 2023. aasta proovihääletustel.';
+  @Input() description: string = 'Olete e‑hääletamas 2025. aasta proovihääletustel.';
 }
