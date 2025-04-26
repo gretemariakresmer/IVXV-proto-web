@@ -1,0 +1,89 @@
+.party-tree {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+
+  .party-list {
+    flex: 1;
+    margin: 0;
+    padding: 0.5rem;
+    list-style: none;
+    overflow-y: auto;
+  }
+
+  .party-group {
+    margin-bottom: 0.25rem;
+
+    .party-header {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+      font-weight: 600;
+      color: #0058a3;
+
+      &:hover {
+        background: #f0f0f0;
+      }
+
+      .arrow {
+        display: inline-block;
+        width: 0.75em;
+        margin-right: 0.5em;
+        transform: rotate(0deg);
+        transition: transform 0.2s;
+        font-size: 0.85em;
+        color: #0058a3;
+
+        &.expanded {
+          transform: rotate(90deg);
+        }
+      }
+    }
+
+    .candidate-list {
+      list-style: none;
+      margin: 0.25rem 0 0.5rem 1.5rem;
+      padding: 0;
+
+      .candidate-item {
+        padding: 0.25rem 0.5rem;
+        cursor: pointer;
+        border-radius: 4px;
+        font-weight: 400;
+
+        &:hover {
+          background: #e8f1fb;
+        }
+      }
+    }
+  }
+
+  .search-box {
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+
+    input {
+      flex: 1;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 24px;
+      font-size: 0.9rem;
+      outline: none;
+
+      &:focus {
+        border-color: #0058a3;
+        box-shadow: 0 0 0 2px rgba(0,88,163,0.2);
+      }
+    }
+
+    .search-icon {
+      margin-left: 0.5rem;
+      font-size: 1.1rem;
+      color: #888;
+    }
+  }
+}

@@ -10,7 +10,6 @@ import { ElectionInformationComponent } from './election/election-information.co
   standalone: true,
   imports: [
     CommonModule,
-    StepProgressComponent,
     ElectionInformationComponent,
   ],
   templateUrl: './introduction.component.html',

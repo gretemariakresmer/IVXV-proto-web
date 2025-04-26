@@ -1,0 +1,18 @@
+<div class="choose-container">
+  <app-party-dropdown (selectionInformation)="onPick($event)"></app-party-dropdown>
+
+  <div class="detail-panel">
+    <app-voting-info
+      [district]="currentDistrict"
+      [constituency]="currentConstituency"
+    ></app-voting-info>
+
+    <app-selection-information
+      [person]="selectedPerson"
+      [partyName]="selectedParty"
+      (cancel)="onCancel()"
+      (confirm)="onConfirm($event)"
+    ></app-selection-information>
+  </div>
+
+</div>
