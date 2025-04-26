@@ -1,7 +1,11 @@
 .choose-container {
   display: flex;
-  height: 100vh;
+  flex: 1 1 auto;
+  padding: 2rem;
+  overflow: hidden;
+
   > * {
+    flex: 1 1 0;
     min-width: 0;
     min-height: 0;
   }
@@ -21,10 +25,21 @@ app-party-dropdown {
   border-right: 1px solid #e0e0e0;
 }
 
-app-selection-information {
-  flex: 1;
+.detail-panel {
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-height: 0;
   padding: 2rem;
-  background: #fafafa;
+
+  app-voting-info {
+    flex: 0 0 auto;
+    margin-bottom: 1rem;
+  }
+
+  app-selection-information {
+    display: block;
+    flex: 1;
+    min-height: 0;
+  }
 }
