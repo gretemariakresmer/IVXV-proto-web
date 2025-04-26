@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { PartyGroup } from '../model/party-group';
 import { PartyService } from '../../service/party.service';
 import { debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs';
-import {Person} from '../model/person';
+import { Person } from '../model/person';
+import { SelectionInformation } from '../model/selection-information';
 
 @Component({
   selector: 'app-party-dropdown',
@@ -14,7 +15,7 @@ import {Person} from '../model/person';
   styleUrls: ['./party-dropdown.component.scss'],
 })
 export class PartyDropdownComponent implements OnInit {
-  @Output() selectedPerson = new EventEmitter<Person>();
+  @Output() selectionInformation = new EventEmitter<SelectionInformation>();
 
   allParties: Array<PartyGroup & { expanded: boolean }> = [];
   filteredParties: Array<PartyGroup & { expanded: boolean }> = [];
@@ -59,8 +60,8 @@ export class PartyDropdownComponent implements OnInit {
     this.searchSubject.next(term);
   }
 
-  pick(c: Person) {
-    this.selectedPerson.emit(c);
+  pick(person: Person, partyName: String) {
+    this.selectionInformation.emit( { person: person, partyName: partyName });
   }
 
   private applyFilter(termin: string) {

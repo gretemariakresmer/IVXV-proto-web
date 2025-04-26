@@ -4,6 +4,7 @@ import { PartyDropdownComponent } from './party-dropdown/party-dropdown.componen
 import { SelectionInformationComponent } from './selection-information/selection-information.component';
 import { Person } from './model/person';
 import { ElectionInfoComponent } from './voting-information/voting-information.component';
+import { SelectionInformation } from './model/selection-information';
 
 @Component({
   selector: 'app-choose-page',
@@ -16,13 +17,15 @@ export class ChoosePageComponent {
   currentDistrict = 'Eesti';
   currentConstituency = 'Valimisringkond nr.1';
 
-  selected?: Person;
+  selectedPerson?: Person;
+  selectedParty?: String;
 
-  onPick(person: Person) {
-    this.selected = person;
+  onPick(selection: SelectionInformation) {
+    this.selectedPerson = selection.person;
+    this.selectedParty = selection.partyName;
   }
   onCancel() {
-    this.selected = undefined;
+    this.selectedPerson = undefined;
   }
   onConfirm(p: Person) {
     console.log('Confirmed:', p);

@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {Person} from '../model/person';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Person } from '../model/person';
 
 @Component({
   selector: 'app-selection-information',
@@ -11,6 +11,7 @@ import {Person} from '../model/person';
 })
 export class SelectionInformationComponent {
   @Input() person?: Person;
+  @Input() partyName?: String;
   @Output() cancel = new EventEmitter<void>();
   @Output() confirm = new EventEmitter<Person>();
 }

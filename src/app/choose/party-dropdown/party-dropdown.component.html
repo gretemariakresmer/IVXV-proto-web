@@ -1,16 +1,16 @@
 <div class="party-tree">
   <ul class="party-list">
-    <li *ngFor="let p of filteredParties" class="party-group">
-      <div class="party-header" (click)="toggle(p)">
-        <span class="arrow" [class.expanded]="p.expanded">▶</span>
-        {{ p.party }}
+    <li *ngFor="let party of filteredParties" class="party-group">
+      <div class="party-header" (click)="toggle(party)">
+        <span class="arrow" [class.expanded]="party.expanded">▶</span>
+        {{ party.party }}
       </div>
-      <ul *ngIf="p.expanded" class="candidate-list">
-        <li *ngFor="let c of p.candidates"
+      <ul *ngIf="party.expanded" class="candidate-list">
+        <li *ngFor="let candidate of party.candidates"
             class="candidate-item"
-            (click)="pick(c); $event.stopPropagation()"
+            (click)="pick(candidate, party.party); $event.stopPropagation()"
         >
-          {{c.id}} - {{ c.firstName }} {{ c.lastName }}
+          {{candidate.id}} - {{ candidate.firstName }} {{ candidate.lastName }}
         </li>
       </ul>
     </li>

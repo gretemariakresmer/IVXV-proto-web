@@ -1,8 +1,9 @@
 <div class="detail-panel">
   <h3>Minu valik on:</h3>
   <div class="choice-card">
-    <div class="choice-id">{{ person?.id }}</div>
+    <div *ngIf="person" class="choice-id">{{ person?.id }}</div>
     <div class="choice-name">{{ person?.firstName }} {{ person?.lastName }}</div>
+    <div> {{ partyName }}</div>
   </div>
   <div class="actions">
     <button (click)="cancel.emit()">Katkestan</button>
