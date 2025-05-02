@@ -1,0 +1,117 @@
+.confirm-container {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  box-sizing: border-box;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.election-info-wrapper {
+  text-align: center;
+  margin-top: 2rem;
+
+  h2 {
+    font-size: 1.75rem;
+    color: #003766;
+    margin-bottom: 0.75rem;
+    font-weight: bold;
+  }
+
+  p.instruction {
+    font-size: 1rem;
+    color: #003766;
+    line-height: 1.4;
+    margin: 0 auto;
+    max-width: 40rem;
+  }
+}
+
+.selection-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+
+  h3 {
+    font-size: 1.25rem;
+    color: #0058a3;
+    margin-bottom: 1rem;
+  }
+
+  .choice-card-wrapper {
+    width: 100%;
+    max-width: 36rem;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  button {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    min-width: 8rem;
+  }
+
+  .btn-outline {
+    background: white;
+    border: 2px solid #0058a3;
+    color: #0058a3;
+
+    &:hover {
+      background: #0058a3;
+      color: white;
+    }
+  }
+
+  .btn-primary {
+    background: #2c7a66;
+    border: none;
+    color: white;
+
+    &:hover {
+      background: #266953;
+    }
+  }
+}
+
+.choice-card {
+  background: #f1f4f8;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+
+  .choice-id {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: bold;
+    background: #0058a3;
+    color: white;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    border-radius: 50%;
+    margin: 0 auto 0.75rem;
+  }
+
+  .choice-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #003766;
+  }
+}

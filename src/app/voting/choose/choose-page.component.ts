@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router }    from '@angular/router';
 import { PartyDropdownComponent } from './party-dropdown/party-dropdown.component';
-import { SelectionInformationComponent } from './selection-information/selection-information.component';
-import { Person } from './model/person';
+import { SelectionInformationComponent } from '../selection-information/selection-information.component';
 import { ElectionInfoComponent } from './voting-information/voting-information.component';
 import { SelectionInformation } from './model/selection-information';
+import { VoteStateService } from '../../state/vote-state.service';
 
 @Component({
   selector: 'app-choose-page',
@@ -17,17 +18,32 @@ export class ChoosePageComponent {
   currentDistrict = 'Eesti';
   currentConstituency = 'Valimisringkond nr.1';
 
-  selectedPerson?: Person;
-  selectedParty?: String;
+  selection?: SelectionInformation;
+
+  constructor(private router: Router,
+              private voteState: VoteStateService) {}
 
   onPick(selection: SelectionInformation) {
-    this.selectedPerson = selection.person;
-    this.selectedParty = selection.partyName;
+    this.selection = selection;
   }
   onCancel() {
-    this.selectedPerson = undefined;
+    this.selection = undefined;
+    this.router.navigate([''])
   }
-  onConfirm(p: Person) {
-    console.log('Confirmed:', p);
+
+  onConfirm() {
+    if (!this.selection) {
+      return;
+    }
+    this.voteState.setSelection(this.selection)
+    this.router.navigate(['/vote']);
+  }
+
+  getSelectedPerson() {
+    return this.selection?.person;
+  }
+
+  getSelectedParty() {
+    return this.selection?.partyName;
   }
 }

@@ -8,10 +8,10 @@
     ></app-voting-info>
 
     <app-selection-information
-      [person]="selectedPerson"
-      [partyName]="selectedParty"
+      [person]="getSelectedPerson()"
+      [partyName]="getSelectedParty()"
       (cancel)="onCancel()"
-      (confirm)="onConfirm($event)"
+      (confirm)="onConfirm()"
     ></app-selection-information>
   </div>
 

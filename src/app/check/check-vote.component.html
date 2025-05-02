@@ -1,0 +1,5 @@
+<h2>Kontrolli oma häält</h2>
+<input [(ngModel)]="hashInput" placeholder="Kinnitus-kood"/>
+<button (click)="check()">Otsi</button>
+<div *ngIf="found">✅ Kood leitud!</div>
+<div *ngIf="checked && !found">❌ Koodi ei leitud.</div>
