@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Person } from '../model/person';
+import { Person } from '../choose/model/person';
 
 @Component({
   selector: 'app-selection-information',

@@ -1,11 +1,11 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PartyGroup } from '../model/party-group';
-import { PartyService } from '../../service/party.service';
 import { debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs';
 import { Person } from '../model/person';
 import { SelectionInformation } from '../model/selection-information';
+import { PartyService } from '../../../service/party.service';
 
 @Component({
   selector: 'app-party-dropdown',
@@ -20,18 +20,24 @@ export class PartyDropdownComponent implements OnInit {
   allParties: Array<PartyGroup & { expanded: boolean }> = [];
   filteredParties: Array<PartyGroup & { expanded: boolean }> = [];
   searchTerm = '';
+  errorMessage: string | null = null;
+  loading: boolean = false;
 
   private searchSubject = new Subject<string>();
   private searchSub!: Subscription;
 
   constructor(private partyService: PartyService) {}
 
-
   ngOnInit() {
+    this.loading = true;
     this.partyService.getPartiesWithCandidates()
-      .subscribe(groups => {
-        this.allParties = groups.map(g => ({ ...g, expanded: false }));
-        this.filteredParties = this.allParties;
+      .subscribe({
+        next: groups => {
+          this.allParties = groups.map(g => ({...g, expanded: false}));
+          this.filteredParties = this.allParties;
+        }, error: err => {
+          this.errorMessage = 'Andmete laadimine ebaõnnestus. Proovi uuesti.';
+        }, complete: () => this.loading = false
       });
 
     this.searchSub = this.searchSubject.pipe(
@@ -77,6 +83,6 @@ export class PartyDropdownComponent implements OnInit {
           expanded: nameMatches || candidates.length > 0
         };
       })
-      .filter(g => g.party.toLowerCase().includes(termin) || g.candidates.length > 0);
+      .filter(g => g.party.toLowerCase().includes(termin) || g.candidates.length > 0)as Array<PartyGroup & {  expanded: boolean }>;
   }
 }

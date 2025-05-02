@@ -1,0 +1,32 @@
+<div class="confirmation-info">
+  <div class="confirmation-card">
+    <div class="text-column">
+      <h2>Hääl on edukalt salvestatud</h2>
+      <p class="intro">
+        Teie hääl on serveris turvaliselt salvestatud. Teie kinnituskood on:
+      </p>
+      <div class="cipher">{{ cipher }}</div>
+
+      <p class="details">
+        Kui soovite oma häält kontrollida, saate rakenduse “EH kontrollrakendus” abil skaneerida QR‐koodi. Seda on võimalik teha kuni 30 minuti jooksul.
+      </p>
+      <p class="details">
+        Palun sulgege rakendus – antud hääletus on testhääletus ning teie valik ei lähe arvesse.
+      </p>
+
+      <div class="actions">
+        <button class="btn-primary" (click)="close()">Sulgen</button>
+        <button class="btn-primary" (click)="openCheck()">Häält kontrollima</button>
+        <button class="btn-primary" (click)="openBulletin()">Avalikule tahvelile</button>
+      </div>
+    </div>
+
+    <div class="qr-column">
+      <img
+        class="qr-code"
+        [src]="'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + (cipher || '')"
+        alt="QR kood"
+      />
+    </div>
+  </div>
+</div>

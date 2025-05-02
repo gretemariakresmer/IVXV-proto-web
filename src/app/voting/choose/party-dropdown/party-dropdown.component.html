@@ -1,0 +1,39 @@
+<div class="party-tree">
+
+  <ng-container *ngIf="loading">
+    <div  class="alert alert-error">
+      <p class="error-text">{{ errorMessage }}</p>
+    </div>
+    <button class="retry-btn" (click)="ngOnInit()">
+      Proovi uuesti
+    </button>
+  </ng-container>
+
+  <ng-container *ngIf="!loading">
+    <ul class="party-list">
+      <li *ngFor="let party of filteredParties" class="party-group">
+        <div class="party-header" (click)="toggle(party)">
+          <span class="arrow" [class.expanded]="party.expanded">▶</span>
+          {{ party.party }}
+        </div>
+        <ul *ngIf="party.expanded" class="candidate-list">
+          <li *ngFor="let candidate of party.candidates"
+              class="candidate-item"
+              (click)="pick(candidate, party.party); $event.stopPropagation()"
+          >
+            {{candidate.id}} - {{ candidate.firstName }} {{ candidate.lastName }}
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <div class="search-box">
+      <input
+        type="text"
+        placeholder="Otsi"
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="onSearch($event)"
+      />
+    </div>
+  </ng-container>
+</div>

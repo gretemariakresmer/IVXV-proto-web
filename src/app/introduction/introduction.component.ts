@@ -1,8 +1,6 @@
-
 import { Component } from '@angular/core';
 import { Router }    from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { StepProgressComponent } from '../step-progress/step-progress.component';
 import { ElectionInformationComponent } from './election/election-information.component';
 
 @Component({
