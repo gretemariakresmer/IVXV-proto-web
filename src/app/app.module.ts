@@ -10,9 +10,10 @@ import { StepProgressComponent } from './step-progress/step-progress.component';
 import { IdCardPinEntryComponent } from './authorization/id-card-auth/id-card-pin-entry.component';
 import { ConnectionScreenComponent } from './authorization/connection/connection-screen.component';
 import { CommonModule } from '@angular/common';
-import {PartyDropdownComponent} from './choose/party-dropdown/party-dropdown.component';
-import {SelectionInformationComponent} from './choose/selection-information/selection-information.component';
-import {ChoosePageComponent} from './choose/choose-page.component';
+import { PartyDropdownComponent } from './voting/choose/party-dropdown/party-dropdown.component';
+import { SelectionInformationComponent } from './voting/selection-information/selection-information.component';
+import { ChoosePageComponent } from './voting/choose/choose-page.component';
+
 
 @NgModule({
   declarations: [
