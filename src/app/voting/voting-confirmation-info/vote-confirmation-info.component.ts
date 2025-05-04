@@ -3,13 +3,17 @@ import { CommonModule }        from '@angular/common';
 import { Router }              from '@angular/router';
 import { VoteStateService }    from '../../state/vote-state.service';
 import { MatIcon } from '@angular/material/icon';
-import { MatIconButton } from '@angular/material/button';
 import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-vote-confirmation-info',
   standalone: true,
-  imports: [CommonModule, MatIcon, MatIconButton, MatTooltip, MatTooltip],
+  imports: [
+    CommonModule,
+    MatIcon,
+    MatTooltip,
+    MatTooltip
+  ],
   templateUrl: './vote-confirmation-info.component.html',
   styleUrls:   ['./vote-confirmation-info.component.scss']
 })
@@ -31,11 +35,7 @@ export class VoteConfirmationInfoComponent implements OnInit {
   }
 
   openCheck(): void {
-    window.open('/check', '_blank', 'noopener');
-  }
-
-  openBulletin(): void {
-    window.open('/bulletin', '_blank', 'noopener');
+    window.open('/bulletin-board', '_blank', 'noopener');
   }
 
   copy() {

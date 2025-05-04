@@ -6,11 +6,18 @@ import { debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs'
 import { Person } from '../model/person';
 import { SelectionInformation } from '../model/selection-information';
 import { PartyService } from '../../../service/party.service';
+import { MatIcon } from '@angular/material/icon';
+import { MatIconButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-party-dropdown',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatIcon,
+    MatIconButton]
+  ,
   templateUrl: './party-dropdown.component.html',
   styleUrls: ['./party-dropdown.component.scss'],
 })
@@ -84,5 +91,10 @@ export class PartyDropdownComponent implements OnInit {
         };
       })
       .filter(g => g.party.toLowerCase().includes(termin) || g.candidates.length > 0)as Array<PartyGroup & {  expanded: boolean }>;
+  }
+
+  cleanInput() {
+    this.searchTerm = '';
+    this.applyFilter('');
   }
 }

@@ -5,7 +5,6 @@ import { ChoosePageComponent } from './voting/choose/choose-page.component';
 import { VoteConfirmComponent } from './voting/vote-confirm.component';
 import { VoteConfirmationInfoComponent } from './voting/voting-confirmation-info/vote-confirmation-info.component';
 import { CheckVoteComponent } from './check/check-vote.component';
-import { BulletinBoardComponent } from './check/bulletin-board/bulletin-board.component';
 
 export const routes: Routes = [
   { path: '', component: AuthMethodSelectionComponent },
@@ -13,8 +12,7 @@ export const routes: Routes = [
   { path: 'choose', component: ChoosePageComponent },
   { path: 'vote', component: VoteConfirmComponent },
   { path: 'vote/confirmed', component: VoteConfirmationInfoComponent },
-  { path: 'check', component: CheckVoteComponent },
-  { path: 'bulletin', component: BulletinBoardComponent }
+  { path: 'bulletin-board', component: CheckVoteComponent }
 ];
 
 export const steps = [

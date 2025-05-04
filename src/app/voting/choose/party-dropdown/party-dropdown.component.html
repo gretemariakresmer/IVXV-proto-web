@@ -1,7 +1,7 @@
 <div class="party-tree">
 
   <ng-container *ngIf="loading">
-    <div  class="alert alert-error">
+    <div class="alert alert-error">
       <p class="error-text">{{ errorMessage }}</p>
     </div>
     <button class="retry-btn" (click)="ngOnInit()">
@@ -10,6 +10,10 @@
   </ng-container>
 
   <ng-container *ngIf="!loading">
+    <div *ngIf="!loading && filteredParties.length === 0"
+         class="no-results"
+    > Otsingule vastavaid valikuid ei leitud.
+    </div>
     <ul class="party-list">
       <li *ngFor="let party of filteredParties" class="party-group">
         <div class="party-header" (click)="toggle(party)">
@@ -33,7 +37,14 @@
         placeholder="Otsi"
         [(ngModel)]="searchTerm"
         (ngModelChange)="onSearch($event)"
-      />
+      >
+      <button
+        *ngIf="searchTerm.length !== 0"
+        mat-icon-button
+        class="clear-btn"
+        (click)="cleanInput()">
+        <mat-icon>clear</mat-icon>
+      </button>
     </div>
   </ng-container>
 </div>

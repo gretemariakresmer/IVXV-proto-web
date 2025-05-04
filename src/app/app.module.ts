@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -35,7 +35,10 @@ import { ChoosePageComponent } from './voting/choose/choose-page.component';
   exports: [
     StepProgressComponent
   ],
-  bootstrapApplication: [AppComponent]
+  bootstrapApplication: [AppComponent],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'et-EE'}
+  ]
 })
 
 export class AppModule { }

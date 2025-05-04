@@ -1,5 +1,30 @@
-<h2>Kontrolli oma häält</h2>
-<input [(ngModel)]="hashInput" placeholder="Kinnitus-kood"/>
-<button (click)="check()">Otsi</button>
-<div *ngIf="found">✅ Kood leitud!</div>
-<div *ngIf="checked && !found">❌ Koodi ei leitud.</div>
+<div class="explorer">
+
+  <h2>Viimati salvestatud hääled</h2>
+  <div class="info">Hääle edukat salvestamist serveris saate kontrollida
+    siin. Selleks sisestage oma kinnituskood ja võrrelge seda salvestatud kontrollkoodidega.</div>
+  <div class="info">Juhul kui häält ei leita, palun teavitada sellest valimiste korraldajaid.</div>
+
+  <app-search-component
+    [placeholder]="'Otsi kinnituskoodi'"
+    (search)="onSearch($event)"
+  ></app-search-component>
+
+  <div *ngIf="loading" class="info">Laen viimaseid hääli…</div>
+  <div *ngIf="!loading && error" class="error">{{ error }}</div>
+
+  <div *ngIf="!loading && !error" class="vote-list">
+    <div *ngFor="let vote of filtered" class="vote-item">
+      <div class="vote-hash">Kontrollkood</div>
+      <div class="vote-content">
+        <div class="hash">
+          {{ vote.ciphertext }}
+        </div>
+        <div class="time">
+          {{ vote.creationTime | date:'dd.MM.yyyy HH:mm:ss:mm' }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
