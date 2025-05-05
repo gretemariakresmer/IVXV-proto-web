@@ -11,6 +11,7 @@
       type="text"
       [placeholder]="placeholder"
       [(ngModel)]="value"
+      (input)="onInput()"
       (keyup.enter)="triggerSearch()"
     />
     <button

@@ -17,14 +17,22 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent {
-
   @Input() placeholder = 'Otsi…';
   @Output() search = new EventEmitter<string>();
 
   value = '';
+  private previousValue = '';
 
   triggerSearch() {
-    this.search.emit(this.value.trim())
+    this.search.emit(this.value.trim());
+    this.previousValue = this.value;
+  }
+
+  onInput() {
+    if (this.value.trim() === '' && this.previousValue.trim() !== '') {
+      this.triggerSearch();
+    }
+    this.previousValue = this.value;
   }
 
   async paste() {

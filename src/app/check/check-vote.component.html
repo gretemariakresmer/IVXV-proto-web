@@ -14,17 +14,46 @@
   <div *ngIf="!loading && error" class="error">{{ error }}</div>
 
   <div *ngIf="!loading && !error" class="vote-list">
-    <div *ngFor="let vote of filtered" class="vote-item">
+    <div *ngFor="let vote of filtered"
+         class="vote-item"
+         [class.selected]="vote.ciphertext === selectedHash"
+         (click)="select(vote)"
+    >
       <div class="vote-hash">Kontrollkood</div>
       <div class="vote-content">
         <div class="hash">
           {{ vote.ciphertext }}
         </div>
         <div class="time">
-          {{ vote.creationTime | date:'dd.MM.yyyy HH:mm:ss:mm' }}
+          {{ vote.creationTime | date:'dd.MM.yyyy HH:mm:ss' }}
         </div>
       </div>
     </div>
   </div>
 
+  <div *ngIf="selectedHash" class="comparison">
+    <h3>Kontrollkoodide võrdlus:</h3>
+    <div class="label">Sisestatud kontrollkood:</div>
+    <div class="line">
+      <ng-container *ngFor="let piece of diff">
+      <span
+        [class.match]="piece.match"
+        [class.diff]="!piece.match"
+      >
+        {{ piece.inputChar || ' ' }}
+      </span>
+      </ng-container>
+    </div>
+    <div class="label">Leitud kood:</div>
+    <div class="line">
+      <ng-container *ngFor="let piece of diff">
+      <span
+        [class.match]="piece.match"
+        [class.diff]="!piece.match"
+      >
+        {{ piece.voteChar || ' ' }}
+      </span>
+      </ng-container>
+    </div>
+  </div>
 </div>

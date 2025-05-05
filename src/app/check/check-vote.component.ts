@@ -6,6 +6,8 @@ import { BlockDto } from './model/block-dto';
 import { SearchComponent } from './search/search.component';
 import { Title } from '@angular/platform-browser';
 import { VoteService } from '../service/vote.service';
+import { MatIcon } from '@angular/material/icon';
+import { DiffPiece } from './model/diff-piece';
 
 @Component({
   selector: 'app-check-vote',
@@ -15,34 +17,48 @@ import { VoteService } from '../service/vote.service';
     FormsModule,
     NgForOf,
     NgIf,
-    SearchComponent],
+    SearchComponent,
+    MatIcon
+  ],
   templateUrl: './check-vote.component.html',
   styleUrls: ['./check-vote.component.scss']
 })
 export class CheckVoteComponent implements OnInit {
-  chain: BlockDto[] = [];
   latest: BlockDto[] = [];
   filtered: BlockDto[] = [];
   searchTerm = '';
   loading = false;
   error?: string;
 
+  selectedHash: string | null = null;
+  diff: DiffPiece[] = [];
+
   constructor(private voteService: VoteService,
               private title: Title) {}
 
   ngOnInit(): void {
-    this.loadChain();
     this.title.setTitle('Hääle kontroll - IVXV proto')
+    this.loadRecent();
+
+    this.voteService.stream().subscribe({
+      next: vote => {
+        this.latest.unshift(vote);
+        this.applyCurrentFilter();
+      },
+      error: () => {
+      this.error = 'Ei saanud hääli laadida.';
+    }
+   });
   }
 
-  private loadChain(): void {
+  private loadRecent(): void {
     this.loading = true;
     this.error = undefined;
-    this.voteService.getVotes().subscribe({
+
+    this.voteService.getRecent().subscribe({
       next: data => {
-        this.chain = data;
-        this.latest   = data.slice(-10).reverse();
-        this.filtered = this.latest;
+        this.latest   = data;
+        this.applyCurrentFilter();
       },
       error: () => {
         this.error = 'Avalikku tahvlit ei õnnestunud laadida.';
@@ -55,12 +71,43 @@ export class CheckVoteComponent implements OnInit {
 
   onSearch(term: string): void {
     this.searchTerm = term.trim();
+    this.selectedHash = null;
+    this.diff = [];
+
     if (!this.searchTerm) {
-      this.filtered = this.latest;
+      this.loadRecent();
     } else {
-      this.filtered = this.chain.filter(b =>
+      this.voteService.search(this.searchTerm).subscribe({
+        next: found => this.filtered = found,
+        error: () => this.error ='Otsing ebaõnnestus.'
+      });
+    }
+  }
+
+  private applyCurrentFilter() {
+    if (!this.searchTerm) {
+      this.filtered = [...this.latest];
+    } else {
+      this.filtered = this.latest.filter(b =>
         b.ciphertext.includes(this.searchTerm)
       );
+    }
+  }
+
+  select(vote: BlockDto) {
+    this.selectedHash = vote.ciphertext;
+    this.computeDiff();
+  }
+
+  private computeDiff() {
+    const a = this.searchTerm;
+    const b = this.selectedHash || '';
+    const max = Math.max(a.length, b.length);
+    this.diff = [];
+    for (let i = 0; i < max; i++) {
+      const inputChar = a.charAt(i) || '';
+      const voteChar = b.charAt(i) || '';
+      this.diff.push({ inputChar, voteChar, match: inputChar === voteChar });
     }
   }
 }
