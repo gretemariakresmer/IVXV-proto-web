@@ -80,7 +80,7 @@
 
   .comparison {
     margin-top: 2rem;
-    font-family: monospace;
+    margin-bottom: 2rem;
 
     h3 {
       margin-bottom: 0.5rem;
@@ -99,6 +99,17 @@
       background: #fafbfc;
       padding: 0.5rem;
       border-radius: 4px;
+      span {
+        padding: 0 0.25rem;
+        &.match {
+          background: #e8f5e9;
+          color: #2e7d32;
+        }
+        &.diff {
+          background: #ffebee;
+          color: #c62828;
+        }
+      }
     }
 
     span.match {

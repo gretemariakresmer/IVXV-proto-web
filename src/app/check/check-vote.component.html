@@ -10,28 +10,7 @@
     (search)="onSearch($event)"
   ></app-search-component>
 
-  <div *ngIf="loading" class="info">Laen viimaseid hääli…</div>
-  <div *ngIf="!loading && error" class="error">{{ error }}</div>
-
-  <div *ngIf="!loading && !error" class="vote-list">
-    <div *ngFor="let vote of filtered"
-         class="vote-item"
-         [class.selected]="vote.ciphertext === selectedHash"
-         (click)="select(vote)"
-    >
-      <div class="vote-hash">Kontrollkood</div>
-      <div class="vote-content">
-        <div class="hash">
-          {{ vote.ciphertext }}
-        </div>
-        <div class="time">
-          {{ vote.creationTime | date:'dd.MM.yyyy HH:mm:ss' }}
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div *ngIf="selectedHash" class="comparison">
+  <div *ngIf="selectedHash && searchTerm" class="comparison">
     <h3>Kontrollkoodide võrdlus:</h3>
     <div class="label">Sisestatud kontrollkood:</div>
     <div class="line">
@@ -56,4 +35,23 @@
       </ng-container>
     </div>
   </div>
+
+  <div *ngIf="loading" class="info">Laen viimaseid hääli…</div>
+  <div *ngIf="!loading && error" class="error">{{ error }}</div>
+
+  <div *ngIf="!loading && !error" class="vote-list">
+    <div *ngFor="let vote of filtered"
+         class="vote-item"
+         [class.selected]="vote.ciphertext === selectedHash"
+         (click)="select(vote)"
+    >
+      <div class="vote-hash">Kontrollkood</div>
+      <div class="vote-content">
+        <div class="hash">{{ vote.ciphertext }}</div>
+        <div class="time">{{ vote.creationTime | date:'dd.MM.yyyy HH:mm:ss' }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="searchTerm && filtered.length === 0" class="info">Kontrollkoodile vastavat häält ei leitud</div>
 </div>
