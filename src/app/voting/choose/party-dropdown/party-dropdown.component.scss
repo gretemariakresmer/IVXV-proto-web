@@ -4,6 +4,13 @@
   flex: 1;
   min-height: 0;
 
+  .no-results {
+    text-align: center;
+    color: #888;
+    margin: 1rem 0;
+    font-size: 1rem;
+  }
+
   .alert {
     &-error {
       background-color: #ffe3e3;
@@ -98,10 +105,11 @@
     display: flex;
     align-items: center;
     flex: 0 0 auto;
+    position: relative;
 
     input {
       flex: 1;
-      padding: 0.5rem 0.75rem;
+      padding: 0.5rem  2.5rem 0.5rem 0.75rem;
       border: 1px solid #ccc;
       border-radius: 24px;
       font-size: 0.9rem;
@@ -113,10 +121,18 @@
       }
     }
 
-    .search-icon {
+    .clear-btn {
+      position: absolute;
+      top: 50%;
+      right: 1rem;
+      transform: translateY(-50%);
+      flex: 0 0 auto;
+      color: #0058a3;
       margin-left: 0.5rem;
-      font-size: 1.1rem;
-      color: #888;
+      z-index: 1;
+
+      mat-icon { font-size: 1.25rem; }
+      &:hover { color: #333; }
     }
   }
 }

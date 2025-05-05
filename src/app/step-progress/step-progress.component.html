@@ -1,4 +1,4 @@
-<div class="stepper-container">
+<div *ngIf="show" class="stepper-container">
   <div class="step-item" *ngFor="let step of steps; let i = index">
     <div
       class="step-circle"

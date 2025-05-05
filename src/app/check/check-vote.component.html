@@ -1,5 +1,57 @@
-<h2>Kontrolli oma häält</h2>
-<input [(ngModel)]="hashInput" placeholder="Kinnitus-kood"/>
-<button (click)="check()">Otsi</button>
-<div *ngIf="found">✅ Kood leitud!</div>
-<div *ngIf="checked && !found">❌ Koodi ei leitud.</div>
+<div class="explorer">
+
+  <h2>Viimati salvestatud hääled</h2>
+  <div class="info">Hääle edukat salvestamist serveris saate kontrollida
+    siin. Selleks sisestage oma kinnituskood ja võrrelge seda salvestatud kontrollkoodidega.</div>
+  <div class="info">Juhul kui häält ei leita, palun teavitada sellest valimiste korraldajaid.</div>
+
+  <app-search-component
+    [placeholder]="'Otsi kinnituskoodi'"
+    (search)="onSearch($event)"
+  ></app-search-component>
+
+  <div *ngIf="selectedHash && searchTerm" class="comparison">
+    <h3>Kontrollkoodide võrdlus:</h3>
+    <div class="label">Sisestatud kontrollkood:</div>
+    <div class="line">
+      <ng-container *ngFor="let piece of diff">
+      <span
+        [class.match]="piece.match"
+        [class.diff]="!piece.match"
+      >
+        {{ piece.inputChar || ' ' }}
+      </span>
+      </ng-container>
+    </div>
+    <div class="label">Leitud kood:</div>
+    <div class="line">
+      <ng-container *ngFor="let piece of diff">
+      <span
+        [class.match]="piece.match"
+        [class.diff]="!piece.match"
+      >
+        {{ piece.voteChar || ' ' }}
+      </span>
+      </ng-container>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="info">Laen viimaseid hääli…</div>
+  <div *ngIf="!loading && error" class="error">{{ error }}</div>
+
+  <div *ngIf="!loading && !error" class="vote-list">
+    <div *ngFor="let vote of filtered"
+         class="vote-item"
+         [class.selected]="vote.ciphertext === selectedHash"
+         (click)="select(vote)"
+    >
+      <div class="vote-hash">Kontrollkood</div>
+      <div class="vote-content">
+        <div class="hash">{{ vote.ciphertext }}</div>
+        <div class="time">{{ vote.creationTime | date:'dd.MM.yyyy HH:mm:ss' }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="searchTerm && filtered.length === 0" class="info">Kontrollkoodile vastavat häält ei leitud</div>
+</div>

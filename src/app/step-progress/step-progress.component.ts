@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {NavigationEnd, Router, RouterLink, RouterLinkActive} from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { steps } from '../app.routes';
-import { NgForOf } from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 import { filter } from 'rxjs';
 
 @Component({
@@ -10,12 +10,14 @@ import { filter } from 'rxjs';
   standalone: true,
   imports: [
     NgForOf,
+    NgIf,
   ],
   styleUrls: ['./step-progress.component.scss']
 })
 export class StepProgressComponent implements OnInit {
   steps = steps;
-  currentStepIndex = 0;
+  currentStepIndex = -1;
+  show = false;
 
   constructor(private router: Router) {}
 
@@ -23,9 +25,13 @@ export class StepProgressComponent implements OnInit {
     this.router.events
       .pipe(filter(evt => evt instanceof NavigationEnd))
       .subscribe((evt: NavigationEnd) => {
-        const url = evt.urlAfterRedirects.split('?')[0].split('#')[0];
-        const idx = this.steps.findIndex(s => url === `/${s.path}`);
-        this.currentStepIndex = idx >= 0 ? idx : 0;
+        const url = evt.urlAfterRedirects.split('?')[0].split('#')[0] || '/';
+        const idx = this.steps.findIndex(s => {
+          const p = s.path ? `/${s.path}` : '/';
+          return p === url;
+        });
+        this.currentStepIndex = idx;
+        this.show = idx !== -1;
       });
   }
 }

@@ -1,0 +1,25 @@
+<div class="search-input-wrapper">
+  <h2 class="search-guide">
+    Sisesta või
+    <button class="inline-btn" (click)="paste()">kleebi</button>
+    kinnituskood
+  </h2>
+
+  <div class="search-cipher">
+    <input
+      class="search-text"
+      type="text"
+      [placeholder]="placeholder"
+      [(ngModel)]="value"
+      (input)="onInput()"
+      (keyup.enter)="triggerSearch()"
+    />
+    <button
+      class="search-btn"
+      mat-icon-button
+      (click)="triggerSearch()"
+    >
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+</div>

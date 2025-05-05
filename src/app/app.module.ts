@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -10,9 +10,10 @@ import { StepProgressComponent } from './step-progress/step-progress.component';
 import { IdCardPinEntryComponent } from './authorization/id-card-auth/id-card-pin-entry.component';
 import { ConnectionScreenComponent } from './authorization/connection/connection-screen.component';
 import { CommonModule } from '@angular/common';
-import {PartyDropdownComponent} from './choose/party-dropdown/party-dropdown.component';
-import {SelectionInformationComponent} from './choose/selection-information/selection-information.component';
-import {ChoosePageComponent} from './choose/choose-page.component';
+import { PartyDropdownComponent } from './voting/choose/party-dropdown/party-dropdown.component';
+import { SelectionInformationComponent } from './voting/selection-information/selection-information.component';
+import { ChoosePageComponent } from './voting/choose/choose-page.component';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +35,10 @@ import {ChoosePageComponent} from './choose/choose-page.component';
   exports: [
     StepProgressComponent
   ],
-  bootstrapApplication: [AppComponent]
+  bootstrapApplication: [AppComponent],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'et-EE'}
+  ]
 })
 
 export class AppModule { }

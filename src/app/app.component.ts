@@ -13,9 +13,5 @@ import { StepProgressComponent } from './step-progress/step-progress.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title: string;
 
-  constructor() {
-    this.title = 'Spring Boot - Angular Application';
-  }
 }
