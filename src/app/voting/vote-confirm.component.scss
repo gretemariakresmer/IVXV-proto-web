@@ -27,6 +27,43 @@
   }
 }
 
+.cipher {
+  position: relative;
+  background: #f1f1f1;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  display: flex;
+  max-width: 100%;
+
+  .cipher-text {
+    font-family: monospace;
+    font-size: 0.9rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+    margin: 0;
+  }
+
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    background: none;
+    transition: background-color 0.2s;
+
+    mat-icon {
+      font-size: 1.25rem;
+      color: #0058a3;
+    }
+
+    &:hover mat-icon {
+      color: #003766;
+    }
+  }
+}
+
 .selection-section {
   display: flex;
   flex-direction: column;

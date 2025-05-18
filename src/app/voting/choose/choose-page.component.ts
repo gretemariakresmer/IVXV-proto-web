@@ -6,6 +6,7 @@ import { SelectionInformationComponent } from '../selection-information/selectio
 import { ElectionInfoComponent } from './voting-information/voting-information.component';
 import { SelectionInformation } from './model/selection-information';
 import { VoteStateService } from '../../state/vote-state.service';
+import { VoteService } from '../../service/vote.service';
 
 @Component({
   selector: 'app-choose-page',
@@ -19,9 +20,11 @@ export class ChoosePageComponent {
   currentConstituency = 'Valimisringkond nr.1';
 
   selection?: SelectionInformation;
+  loadingPreview = false;
 
   constructor(private router: Router,
-              private voteState: VoteStateService) {}
+              private voteState: VoteStateService,
+              private voteService: VoteService) {}
 
   onPick(selection: SelectionInformation) {
     this.selection = selection;
@@ -35,8 +38,23 @@ export class ChoosePageComponent {
     if (!this.selection) {
       return;
     }
+
+    const sel = this.selection;
+
+    this.loadingPreview = true;
+    this.voteService.preview(this.selection.person.id)
+      .subscribe({
+        next: dto => {
+          this.loadingPreview = false;
+          this.voteState.setSelection(sel);
+          this.voteState.setPreview(dto);
+          this.router.navigate(['/vote']);
+        },
+        error: err => {
+          this.router.navigate(['/choose'])
+        }
+      })
     this.voteState.setSelection(this.selection)
-    this.router.navigate(['/vote']);
   }
 
   getSelectedPerson() {

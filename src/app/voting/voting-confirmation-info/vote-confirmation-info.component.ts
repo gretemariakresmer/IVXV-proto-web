@@ -37,11 +37,4 @@ export class VoteConfirmationInfoComponent implements OnInit {
   openCheck(): void {
     window.open('/bulletin-board', '_blank', 'noopener');
   }
-
-  copy() {
-    navigator.clipboard.writeText(this.cipher).then(() => {
-      this.copied = true;
-      setTimeout(() => this.copied = false, 2000);
-    });
-  }
 }

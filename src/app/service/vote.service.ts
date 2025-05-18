@@ -2,15 +2,21 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { SelectionInformation } from '../voting/choose/model/selection-information';
 import { VoteResponse } from '../voting/choose/model/vote-response';
 import { BlockDto } from '../check/model/block-dto';
+import { EncryptPreviewDto } from '../voting/choose/model/encrypt-preview-dto';
 
 @Injectable({ providedIn: 'root' })
 export class VoteService {
   constructor(private http: HttpClient) {}
 
   private baseUrl = `${environment.apiUrl}/api/votes`;
+
+  preview(candidateId: Number): Observable<EncryptPreviewDto> {
+    return this.http.post<EncryptPreviewDto>(
+      `${this.baseUrl}/preview?candidate=${candidateId}`, {}
+    );
+  }
 
   getRecent(): Observable<BlockDto[]> {
     return this.http.get<BlockDto[]>(this.baseUrl);
@@ -33,10 +39,9 @@ export class VoteService {
     });
   }
 
-  submitVote(selection: SelectionInformation): Observable<VoteResponse> {
-    return this.http.post<VoteResponse>(`${this.baseUrl}`, {
-      personId: selection.person.id,
-      party: selection.partyName,
-    });
+  confirm(previewToken: string): Observable<VoteResponse> {
+    return this.http.post<VoteResponse>(
+      `${this.baseUrl}?previewToken=${previewToken}`, {}
+    );
   }
 }

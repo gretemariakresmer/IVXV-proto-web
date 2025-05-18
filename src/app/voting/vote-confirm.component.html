@@ -9,6 +9,21 @@
       </p>
     </div>
 
+    <div class="election-info-wrapper">
+      <p class ="instruction">Allkirjastatav krüpteering:</p>
+      <div class ="cipher">
+        <div class ="cipher-text">{{ cipher }}</div>
+        <button class="copy-btn"
+                (click)="copy()"
+                matTooltip="Kopeeri"
+                matTooltipClass ="custom-tooltip"
+                matTooltipHideDelay="100"
+        >
+          <mat-icon>content_copy</mat-icon>
+        </button>
+      </div>
+    </div>
+
     <div class="selection-section">
       <h3>Minu valik on:</h3>
       <div class="choice-card-wrapper">
